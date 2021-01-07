@@ -23,6 +23,10 @@ ApplicationWindow {
         onCountChanged: {
             //console.log(get(count-1, 'fileName'))
             app.url='/home/ns/temp-screenshots/'+get(count-1, 'fileName')
+            console.log('Count app.url='+app.url)
+            tReload.start()
+            //img.source=app.url
+            //img2.source=app.url
             let ms=app.url.split('_')[1].replace('.png', '')
             let jsonFileName='/home/ns/temp-screenshots/'+ms+'.json'
             let jsonFileData=unik.getFile(jsonFileName)
@@ -57,6 +61,17 @@ ApplicationWindow {
             img2.source=app.url+'?r='+d.getTime()
         }
     }
+    Timer{
+        id: tReload
+        running: false
+        repeat: false
+        interval: 3000
+        onTriggered: {
+            let d=new Date(Date.now())
+            img.source=app.url+'?r='+d.getTime()
+            img2.source=app.url+'?r='+d.getTime()
+        }
+    }
 
     Item{
         id: xApp
@@ -76,6 +91,10 @@ ApplicationWindow {
                 anchors.horizontalCenterOffset: xApp.width*0.25
                 property bool mov: false
                 onStatusChanged: {
+                    //Image.Error
+                    if(status===Image.Error){
+                        tReload.start()
+                    }
                     if(status===Image.Ready){
                         //Qt.quit()
                         img2.x=0-600
