@@ -13,7 +13,7 @@ Rectangle {
         height: width
         radius: width*0.5
         color: 'transparent'
-        border.width: 3
+        border.width: 0//poner en 3 para ver si está centrado
         border.color: 'blue'
         anchors.centerIn: r
         anchors.horizontalCenterOffset: app.fs*0.77
@@ -27,10 +27,12 @@ Rectangle {
             anchors.centerIn: parent
             rotation: 45
             color: 'transparent'
-            property string info: '???'
+            property string info1: '???'
+            property string info2: '???'
+            property string info3: '???'
             Rectangle{
                 id: info
-                width: app.fs*8
+                width: app.fs*7.24
                 height: width
                 radius: width*0.5
                 border.width: 4
@@ -43,19 +45,46 @@ Rectangle {
                 Behavior on opacity {
                     NumberAnimation{duration: 200}
                 }
-                Text {
-                    color: 'red'
-                    font.pixelSize: app.fs*2
-                    text: compSen.info
-                    width: parent.width-app.fs
-                    wrapMode: Text.WordWrap
-                    textFormat: Text.RichText
-                    horizontalAlignment: Text.AlignHCenter
+                Column{
+                    spacing: app.fs*0.1
                     anchors.centerIn: parent
+                    Text {
+                        id: i1
+                        color: 'red'
+                        font.pixelSize: app.fs*1.5
+                        text: compSen.info1
+                        width: parent.width-app.fs
+                        wrapMode: Text.WordWrap
+                        textFormat: Text.RichText
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                    Text {
+                        id: i2
+                        color: 'red'
+                        font.pixelSize: app.fs*2
+                        text: compSen.info2
+                        width: parent.width-app.fs*1.5
+                        wrapMode: Text.WordWrap
+                        textFormat: Text.RichText
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
+                    Text {
+                        id: i3
+                        color: 'red'
+                        font.pixelSize: app.fs*2
+                        text: compSen.info3
+                        width: parent.width-app.fs
+                        wrapMode: Text.WordWrap
+                        textFormat: Text.RichText
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                    }
                 }
             }
             Rectangle{
-                width: 8
+                width: 6
                 height: parent.height/2
                 color: 'transparent'
                 anchors.horizontalCenter: parent.right
@@ -102,12 +131,75 @@ Rectangle {
         let jsonData=JSON.parse(jsonFileData)
         //let numSigno=app.objSignsNames.indexOf()
 
-        addSC('sun', jsonData.psc.sun.s, jsonData.psc.sun.g, (jsonData.psc.sun.rh).toUpperCase(), jsonData)
-        addSC('moon', jsonData.psc.moon.s, jsonData.psc.moon.g, (jsonData.psc.moon.rh).toUpperCase(), jsonData)
-        addSC('mercury', jsonData.psc.mercury.s, jsonData.psc.mercury.g, (jsonData.psc.mercury.rh).toUpperCase(), jsonData)
+        let sObj=''
+        let obj
+
+        sObj='sun'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='moon'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='mercury'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='venus'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='mars'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='jupiter'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='saturn'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='uranus'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='neptune'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='pluto'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='n'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='s'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='hiron'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='proserpina'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='selena'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
+
+        sObj='lilith'
+        obj=jsonData.psc[sObj]
+        addSC(sObj, obj.s, obj.g, obj.m, (obj.rh).toUpperCase(), jsonData)
     }
 
-    function addSC(c, s, g, h, j){
+    function addSC(c, s, g, m, h, j){
         let numSigno=app.objSignsNames.indexOf(j.pc.h1.s)
         let gAsc=j.pc.h1.g+numSigno*30
         console.log('NumSig:'+numSigno)
@@ -115,14 +207,14 @@ Rectangle {
         let vRCuerpo=30*getSigIndex(s)
         let gTotSig=0-vRCuerpo+gAsc-g-90//gAsc-(app.objSignsNames.indexOf(s)+1)*30+g//+(360-gAsc)
         console.log('-->'+c+' '+s+' '+g+' '+app.objSignsNames.indexOf(s))
-        let fs=parseInt(app.fs*2)
-        let fs2=parseInt(fs *0.5)
-        let info='<b>'+app.planetas[app.planetasRes.indexOf(c)]+'</b>'
-            +'<b style="font-size:'+fs2+'px">'+app.signos[app.objSignsNames.indexOf(s)]+'</b><br />'
-            +'<b style="font-size:'+fs2+'px">°'+g+'\'00</b>'
-            +'<b style="font-size:'+fs2+'px">Casa '+h+'</b>'
+        let fs=parseInt(app.fs*1.5)
+        let fs2=parseInt(fs *0.7)
+        console.log('Planeta: '+app.planetas[app.planetasRes.indexOf(c)])
+        let info1='<b>'+app.planetas[app.planetasRes.indexOf(c)]+'</b>'
+        let info2='<b style="font-size:'+fs+'px">'+app.signos[app.objSignsNames.indexOf(s)]+'</b>'
+        let info3='<b style="font-size:'+fs2+'px">°'+g+'\''+m+' Casa '+h+'</b>'
         let comp=sc
-        let obj=comp.createObject(rueda, {rotation: gTotSig, info:info})
+        let obj=comp.createObject(rueda, {rotation: gTotSig, info1:info1,  info2:info2, info3:info3})
     }
     function getSigIndex(s){
         let ms=['ari', 'tau', 'gem', 'cnc', 'leo', 'vir', 'lib', 'sco', 'sgr', 'cap', 'aqr', 'psc']
