@@ -12,6 +12,12 @@ ApplicationWindow {
     property int fs: width*0.03
     property string url
     property int mod: 0
+
+    property var signos: ['Aries', 'Tauro', 'Géminis', 'Cáncer', 'Leo', 'Virgo', 'Libra', 'Escorpio', 'Sagitario', 'Capricornio', 'Acuario', 'Piscis']
+    property var planetas: ['Sol', 'Luna', 'Mercurio', 'Venus', 'Marte', 'Júpiter', 'Saturno', 'Urano', 'Neptuno', 'Plutón', 'Quirón', 'Proserpina', 'Selena', 'Lilith', 'N.Sur', 'N.Norte']
+    property var planetasRes: ['sun', 'moon', 'mercury', 'venus', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'pluto', 'hiron', 'proserpina', 'selena', 'iilith', 'n', 's']
+    property var objSignsNames: ['ari', 'tau', 'gem', 'cnc', 'leo', 'vir', 'lib', 'sco', 'sgr', 'cap', 'aqr', 'psc']
+
     FolderListModel{
         folder: 'file:///home/ns/temp-screenshots'
         showDirs: false
@@ -49,7 +55,15 @@ ApplicationWindow {
                 +'<p style="font-size:20px;"><b> '+vCiudad+'</b></p>'
                 +'<p style="font-size:20px;"> <b>long:</b> '+vlon+' <b>lat:</b> '+vlat+'</p>'
             xNombre.nom=textData
+            tLoadData.restart()
         }
+    }
+    Timer{
+        id: tLoadData
+        running: false
+        repeat: false
+        interval: 2000
+        onTriggered: xAreaInteractiva.loadData()
     }
     Timer{
         id: tUpdate
@@ -150,6 +164,10 @@ ApplicationWindow {
                 source: fb
                 brightness: 0.35
                 contrast: 0.7
+            }
+            XAreaInteractiva{
+                id: xAreaInteractiva
+                anchors.fill: img
             }
             XMira{
                 id: xMiraDer
@@ -311,6 +329,9 @@ ApplicationWindow {
     Shortcut{
         sequence: 'Down'
         onActivated: img.y+=4
+    }
+    Component.onCompleted: {
+
     }
     function getEdad(dateString) {
         let hoy = new Date()
