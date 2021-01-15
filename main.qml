@@ -27,8 +27,9 @@ ApplicationWindow {
             tReload.start()
             //img.source=app.url
             //img2.source=app.url
-            let ms=app.url.split('_')[1].replace('.png', '')
-            let jsonFileName='/home/ns/temp-screenshots/'+ms+'.json'
+            let fn=app.url.replace('cap_', '').replace('.png', '')
+            let jsonFileName=fn+'.json'//'/home/ns/temp-screenshots/'+ms+'.json'
+            console.log('FileName: '+jsonFileName)
             let jsonFileData=unik.getFile(jsonFileName)
             //console.log(jsonFileData)
             let jsonData=JSON.parse(jsonFileData)

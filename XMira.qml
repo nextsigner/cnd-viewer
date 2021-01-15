@@ -21,6 +21,15 @@ Item {
         border.color: 'red'
         color: 'transparent'
         anchors.centerIn: parent
+        Rectangle{
+            width: parent.width+2
+            height: width
+            radius: width*0.5
+            border.width: 2
+            border.color: 'white'
+            color: 'transparent'
+            anchors.centerIn: parent
+        }
     }
     Timer{
         running: true
